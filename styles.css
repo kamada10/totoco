@@ -1,0 +1,585 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #0011;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+/* ヘッダー */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.header-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* メインコンテンツ */
+.main-content {
+    flex: 1;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #0011;
+}
+
+/* カードコンテナ */
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* カード */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 0 1rem;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* 質問部分 */
+.question {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.question h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.question-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+/* 選択肢コンテナ */
+.options-container {
+    padding: 1.5rem;
+}
+
+/* 選択肢ボタン */
+.option-button {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.option-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+
+.option-button:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+    transform: translateY(-1px);
+}
+
+.option-button:active {
+    transform: translateY(0);
+}
+
+.option-button.selected {
+    border-color: #667eea;
+    background: #e3ffe3;
+    color: #333;
+}
+
+.option-button:last-child {
+    margin-bottom: 0;
+}
+
+.option-text {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.option-subtext {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+/* 年式選択 */
+.year-select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.year-select:hover {
+    border-color: #667eea;
+}
+
+.year-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 見積もり結果 */
+.estimate-container {
+    padding: 1.5rem;
+}
+
+.estimate-summary {
+    background: #f8f9ff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.estimate-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.estimate-item:last-child {
+    margin-bottom: 0;
+}
+
+.estimate-label {
+    font-weight: 600;
+    color: #666;
+}
+
+.estimate-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.price-display {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.price-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 3rem;
+    gap: 0.5rem;
+}
+
+.price-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.price-amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.eco-price {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    margin-top: 0.5rem;
+}
+
+.eco-breakdown {
+    background: #f0f8f0;
+    border-left: 3px solid #4CAF50;
+}
+
+.eco-breakdown .breakdown-value {
+    text-align: right;
+}
+
+#eco-weight-tax {
+    text-align: right !important;
+    margin-left: auto !important;
+}
+
+.eco-breakdown {
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.eco-breakdown .breakdown-value {
+    text-align: right !important;
+    margin-left: auto !important;
+}
+
+.price-breakdown {
+    margin-bottom: 1.5rem;
+}
+
+.price-breakdown h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.breakdown-label {
+    font-weight: 500;
+    color: #666;
+    white-space: nowrap;
+}
+
+.breakdown-value {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
+.estimate-notes {
+    margin-bottom: 1.5rem;
+}
+
+.note-text {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.note-text:last-child {
+    margin-bottom: 0;
+}
+
+.eco-note {
+    color: #4CAF50;
+    font-weight: 500;
+    background: #f0f8f0;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.reservation-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation-link {
+    text-decoration: none;
+}
+
+.reservation-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.reservation-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.reservation-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.reservation-btn:active {
+    transform: translateY(0);
+}
+
+/* フッター */
+.footer {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* レスポンシブデザイン */
+
+/* タブレット（768px以上） */
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .main-content {
+        padding: 2rem;
+    }
+    
+    .question {
+        padding: 2rem;
+    }
+    
+    .question h3 {
+        font-size: 1.2rem;
+    }
+    
+    .options-container {
+        padding: 2rem;
+    }
+    
+    .option-button {
+        padding: 1.2rem;
+        font-size: 1.1rem;
+    }
+    
+    .estimate-container {
+        padding: 2rem;
+    }
+}
+
+/* デスクトップ（1024px以上） */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+    }
+    
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+    }
+    
+    .card {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* スマートフォン（480px以下） */
+@media (max-width: 480px) {
+    .header {
+        padding: 0.75rem;
+    }
+    
+    .header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .main-content {
+        padding: 0.75rem;
+    }
+    
+    .question {
+        padding: 1rem;
+    }
+    
+    .question h3 {
+        font-size: 1rem;
+    }
+    
+    .options-container {
+        padding: 1rem;
+    }
+    
+    .option-button {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+    }
+    
+    .estimate-container {
+        padding: 1rem;
+    }
+}
+
+/* 横画面対応 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .header {
+        padding: 0.5rem;
+    }
+    
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .main-content {
+        padding: 0.5rem;
+    }
+    
+    .question {
+        padding: 0.75rem;
+    }
+    
+    .question h3 {
+        font-size: 0.95rem;
+    }
+    
+    .options-container {
+        padding: 0.75rem;
+    }
+    
+    .option-button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .estimate-container {
+        padding: 0.75rem;
+    }
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+    
+    .option-button {
+        transition: none;
+    }
+    
+    .reservation-btn {
+        transition: none;
+    }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+    
+    .container {
+        background-color: #2a2a2a;
+    }
+    
+    .card {
+        background: #3a3a3a;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    
+    .option-button {
+        background: #3a3a3a;
+        color: #e0e0e0;
+        border-color: #555;
+    }
+    
+    .option-button:hover {
+        background: #4a4a4a;
+        border-color: #667eea;
+    }
+    
+    .year-select {
+        background: #3a3a3a;
+        color: #e0e0e0;
+        border-color: #555;
+    }
+    
+    .year-select:hover {
+        border-color: #667eea;
+    }
+    
+    .estimate-summary {
+        background: #4a4a4a;
+    }
+    
+    .breakdown-item {
+        border-bottom-color: #555;
+    }
+    
+    .footer {
+        background: #1a1a1a;
+        color: #999;
+        border-top-color: #444;
+    }
+}

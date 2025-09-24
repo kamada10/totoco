@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>車検見積</title>
+    <link rel="stylesheet" href="styles.css?v=6">
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i data-lucide="car" class="header-icon"></i>車検見積</h1>
+        </header>
+        
+        <main class="main-content">
+            <div id="cards-container" class="cards-container">
+                <!-- 車種選択カード -->
+                <div class="card">
+                    <div class="question">
+                        <h3>車種を選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <button class="option-button" data-cartype="1" onclick="selectCarType(1)">
+                            <i data-lucide="flag" class="option-icon"></i>
+                            <span class="option-text">日本車</span>
+                        </button>
+                        <button class="option-button" data-cartype="2" onclick="selectCarType(2)">
+                            <i data-lucide="globe" class="option-icon"></i>
+                            <span class="option-text">輸入車</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 年式選択カード -->
+                <div class="card">
+                    <div class="question">
+                        <h3><i data-lucide="calendar" class="question-icon"></i>年式を選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <select id="year-select" class="year-select" onchange="selectYear()">
+                            <option value="2025">2025年（令和7年）</option>
+                            <option value="2024">2024年（令和6年）</option>
+                            <option value="2023">2023年（令和5年）</option>
+                            <option value="2022">2022年（令和4年）</option>
+                            <option value="2021">2021年（令和3年）</option>
+                            <option value="2020">2020年（令和2年）</option>
+                            <option value="2019">2019年（平31・令和元年）</option>
+                            <option value="2018">2018年（平成30年）</option>
+                            <option value="2017">2017年（平成29年）</option>
+                            <option value="2016">2016年（平成28年）</option>
+                            <option value="2015">2015年（平成27年）</option>
+                            <option value="2014">2014年（平成26年）</option>
+                            <option value="2013">2013年（平成25年）</option>
+                            <option value="2012">2012年（平成24年）</option>
+                            <option value="2011">2011年（平成23年）</option>
+                            <option value="2010">2010年（平成22年）</option>
+                            <option value="2009">2009年（平成21年）</option>
+                            <option value="2008">2008年（平成20年）</option>
+                            <option value="2007">2007年（平成19年）</option>
+                            <option value="2006">2006年（平成18年）以前</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 車種詳細選択カード（日本車） -->
+                <div class="card" id="japanese-car-card">
+                    <div class="question">
+                        <h3><i data-lucide="car-front" class="question-icon"></i>車種を選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <button class="option-button" data-ctype="21" onclick="selectCarDetail('軽車両全般')">
+                            <span class="option-text">軽車両全般</span>
+                        </button>
+                        <button class="option-button" data-ctype="22" onclick="selectCarDetail('プリウス etc.')">
+                            <span class="option-text">プリウス etc.</span>
+                            <span class="option-subtext">1.5t以下ハイブリット車</span>
+                        </button>
+                        <button class="option-button" data-ctype="23" onclick="selectCarDetail('ヴィッツ etc.')">
+                            <span class="option-text">ヴィッツ etc.</span>
+                            <span class="option-subtext">0.5t超～1t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="24" onclick="selectCarDetail('カローラ etc.')">
+                            <span class="option-text">カローラ etc.</span>
+                            <span class="option-subtext">1t超～1.5t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="25" onclick="selectCarDetail('クラウン etc.')">
+                            <span class="option-text">クラウン etc.</span>
+                            <span class="option-subtext">1.5t超～2t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="26" onclick="selectCarDetail('エルグランド etc.')">
+                            <span class="option-text">エルグランド etc.</span>
+                            <span class="option-subtext">2t超</span>
+                        </button>
+                        <button class="option-button" data-ctype="27" onclick="selectCarDetail('ライトバン全般')">
+                            <span class="option-text">ライトバン全般</span>
+                            <span class="option-subtext">総重量2t以下</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 車種詳細選択カード（輸入車） -->
+                <div class="card" id="import-car-card" style="display: none;">
+                    <div class="question">
+                        <h3><i data-lucide="car-front" class="question-icon"></i>車種を選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <button class="option-button" data-ctype="28" onclick="selectCarDetail('小型車')">
+                            <span class="option-text">小型車</span>
+                            <span class="option-subtext">1t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="29" onclick="selectCarDetail('中型車')">
+                            <span class="option-text">中型車</span>
+                            <span class="option-subtext">1.5t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="30" onclick="selectCarDetail('大型車（1.5t超～2t以下）')">
+                            <span class="option-text">大型車</span>
+                            <span class="option-subtext">1.5t超～2t以下</span>
+                        </button>
+                        <button class="option-button" data-ctype="31" onclick="selectCarDetail('大型車（2t超～2.5t以下）')">
+                            <span class="option-text">大型車</span>
+                            <span class="option-subtext">2t超～2.5t以下</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- コース選択カード（日本車） -->
+                <div class="card" id="japanese-course-card">
+                    <div class="question">
+                        <h3><i data-lucide="clock" class="question-icon"></i>コースを選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <button class="option-button" data-costype="14" onclick="selectCourse('立ち会い車検')">
+                            <span class="option-text">立ち会い車検</span>
+                        </button>
+                        <button class="option-button" data-costype="15" onclick="selectCourse('ワンデイ車検')">
+                            <span class="option-text">ワンデイ車検</span>
+                        </button>
+                        <button class="option-button" data-costype="87" onclick="selectCourse('クイック車検')">
+                            <span class="option-text">クイック車検</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- コース選択カード（輸入車） -->
+                <div class="card" id="import-course-card" style="display: none;">
+                    <div class="question">
+                        <h3><i data-lucide="clock" class="question-icon"></i>コースを選択してください</h3>
+                    </div>
+                    <div class="options-container">
+                        <button class="option-button" data-costype="14" onclick="selectCourse('立ち会い車検')">
+                            <span class="option-text">立ち会い車検</span>
+                        </button>
+                        <button class="option-button" data-costype="15" onclick="selectCourse('ワンデイ車検')">
+                            <span class="option-text">ワンデイ車検</span>
+                        </button>
+                        <button class="option-button" data-costype="87" onclick="selectCourse('クイック車検')">
+                            <span class="option-text">クイック車検</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 見積もり結果カード -->
+                <div class="card" id="estimate-card" style="display: none;">
+                    <div class="question">
+                        <h3><i data-lucide="calculator" class="question-icon"></i>車検見積もり結果</h3>
+                    </div>
+                    <div class="estimate-container">
+                        <div class="estimate-summary">
+                            <div class="estimate-item">
+                                <span class="estimate-label">年式:</span>
+                                <span class="estimate-value" id="estimate-year">2025年（令和7年）</span>
+                            </div>
+                            <div class="estimate-item">
+                                <span class="estimate-label">車種:</span>
+                                <span class="estimate-value" id="estimate-car">未選択</span>
+                            </div>
+                            <div class="estimate-item">
+                                <span class="estimate-label">コース:</span>
+                                <span class="estimate-value" id="estimate-course">未選択</span>
+                            </div>
+                        </div>
+                        
+                        <div class="price-display">
+                            <div class="price-total" id="normal-price-display">
+                                <span class="price-label">合計（エコカー減免適用なし）</span>
+                                <span class="price-amount" id="total-price">-</span>
+                            </div>
+                            <div class="price-total eco-price" id="eco-price-display" style="display: none;">
+                                <span class="price-label">合計（エコカー減免適用）</span>
+                                <span class="price-amount" id="eco-total-price">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <h4>料金内訳</h4>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">重量税</span>
+                                <span class="breakdown-value" id="weight-tax">-</span>
+                            </div>
+                            <div class="breakdown-item eco-breakdown" id="eco-weight-tax-item" style="display: none;">
+                                <span class="breakdown-label">重量税（エコカー減免適用）</span>
+                                <span class="breakdown-value" id="eco-weight-tax">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">自賠責保険料</span>
+                                <span class="breakdown-value" id="liability-insurance">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">検査登録印紙代</span>
+                                <span class="breakdown-value" id="inspection-stamp">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">登録手数料</span>
+                                <span class="breakdown-value" id="registration-fee">-</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">車検料(税込)</span>
+                                <span class="breakdown-value" id="inspection-fee">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="estimate-notes">
+                            <p class="note-text eco-note">R2年度・R12年度燃費基準達成車が対象です。詳しくは国土交通省HPをご確認ください。</p>
+                            <p class="note-text">※車検に通らない箇所や、ご希望箇所を整備した場合、別途料金が必要です。</p>
+                            <p class="note-text">※算出される金額は概算となります。実際にお車を確認させていただいた後、正式なお見積りを提示させていただきます。</p>
+                        </div>
+                        
+                        <div class="reservation-button">
+                            <button class="reservation-btn" onclick="showComingSoon()">
+                                <i data-lucide="calendar-check" class="reservation-icon"></i>
+                                車検のご予約はこちら
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 車検見積</p>
+        </footer>
+    </div>
+    
+    <script src="script.js?v=5"></script>
+</body>
+</html>
